@@ -68,42 +68,44 @@ export function CalculatorView() {
 
   return (
     <div className="space-y-4">
-      {!user && (
-        <div className="glass-panel animate-fade-up flex flex-wrap items-center justify-between gap-3 px-4 py-3">
-          <p className="text-[13px] text-[#524a39]">لحفظ قراراتك سجّل حساباً.</p>
-          <div className="flex gap-2">
-            <Link href="/login" className="btn-secondary !py-1.5 !text-[12px]">
-              دخول
-            </Link>
-            <Link href="/register" className="btn-primary !py-1.5 !text-[12px]">
-              إنشاء حساب
-            </Link>
-          </div>
-        </div>
-      )}
-
       {flash && (
         <div className="glass-panel animate-pop px-4 py-3 text-[13px] font-medium text-[#1c1916]">
           {flash}
         </div>
       )}
 
-      <div className="glass-panel animate-fade-up flex flex-wrap items-center justify-between gap-3 px-4 py-3.5">
+      <div className="glass-panel animate-fade-up flex flex-col gap-3 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#171717] text-white shadow-[0_8px_18px_-10px_rgba(23,23,23,0.5)]">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#171717] text-white">
             <Hourglass className="h-4 w-4" strokeWidth={2.3} />
           </span>
           <div>
             <p className="text-[14px] font-semibold text-[#1c1916]">قبل ما تشتري</p>
-            <p className="text-[12px] text-[#737373]">حوّل السعر لساعات من وقتك.</p>
+            <p className="text-[12px] text-[#737373]">
+              {user
+                ? "حوّل السعر لساعات من وقتك."
+                : "سجّل حساباً لحفظ قراراتك وحساب الساعات."}
+            </p>
           </div>
         </div>
-        <p className="rounded-full border border-white/50 bg-white/45 px-3 py-1.5 text-[12px] text-[#524a39] backdrop-blur-md">
-          ساعتك{" "}
-          <strong className="tabular-nums text-[#1c1916]">
-            {formatMoney(rate, settings.currency)}
-          </strong>
-        </p>
+        <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+          <p className="rounded-full border border-[#e8e0d4] bg-white/80 px-3 py-1.5 text-[12px] text-[#524a39]">
+            ساعتك{" "}
+            <strong className="tabular-nums text-[#1c1916]">
+              {formatMoney(rate, settings.currency)}
+            </strong>
+          </p>
+          {!user && (
+            <>
+              <Link href="/login" className="btn-secondary !py-1.5 !text-[12px]">
+                دخول
+              </Link>
+              <Link href="/register" className="btn-primary !py-1.5 !text-[12px]">
+                إنشاء حساب
+              </Link>
+            </>
+          )}
+        </div>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-12">

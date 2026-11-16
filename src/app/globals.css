@@ -71,15 +71,12 @@ body {
 
 .field {
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid #e8e0d4;
   border-radius: 0.85rem;
-  background: rgba(255, 255, 255, 0.55);
+  background: #ffffff;
   padding: 0.75rem 0.9rem;
   color: #1c1916;
   outline: none;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
@@ -87,13 +84,11 @@ body {
 }
 
 .field:hover {
-  background: rgba(255, 255, 255, 0.72);
-  border-color: rgba(255, 255, 255, 0.8);
+  border-color: #d4c9b8;
 }
 
 .field:focus {
-  background: rgba(255, 255, 255, 0.88);
-  border-color: rgba(23, 23, 23, 0.18);
+  border-color: rgba(23, 23, 23, 0.35);
   box-shadow: 0 0 0 3px rgba(23, 23, 23, 0.08);
 }
 
@@ -101,11 +96,8 @@ body {
   display: flex;
   overflow: hidden;
   border-radius: 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.55);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid #e8e0d4;
+  background: #ffffff;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
@@ -113,12 +105,11 @@ body {
 }
 
 .money-wrap:hover {
-  background: rgba(255, 255, 255, 0.72);
+  border-color: #d4c9b8;
 }
 
 .money-wrap:focus-within {
-  background: rgba(255, 255, 255, 0.88);
-  border-color: rgba(23, 23, 23, 0.18);
+  border-color: rgba(23, 23, 23, 0.35);
   box-shadow: 0 0 0 3px rgba(23, 23, 23, 0.08);
 }
 
@@ -137,13 +128,13 @@ body {
   flex-shrink: 0;
   align-items: center;
   appearance: none;
-  background: rgba(255, 255, 255, 0.35);
+  background: #f7f2ea;
   padding: 0 0.9rem;
   font-size: 13px;
   font-weight: 650;
   color: #524a39;
   border: 0;
-  border-inline-start: 1px solid rgba(28, 25, 22, 0.06);
+  border-inline-start: 1px solid #ebe3d7;
 }
 
 .btn-primary {
@@ -210,19 +201,20 @@ body {
 .glass-panel,
 .glass-banner {
   border-radius: 1.15rem;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(228, 220, 208, 0.9);
+  /* Opaque fallback first so production never looks "empty" if blur fails */
+  background: #fffdf9;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.72) 0%,
-    rgba(255, 252, 247, 0.58) 50%,
-    rgba(255, 248, 240, 0.65) 100%
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 252, 247, 0.88) 50%,
+    rgba(255, 248, 240, 0.9) 100%
   );
   box-shadow:
     0 10px 40px -18px rgba(28, 25, 22, 0.18),
-    0 1px 0 rgba(255, 255, 255, 0.75) inset,
-    0 0 0 1px rgba(212, 160, 23, 0.05);
-  backdrop-filter: blur(22px) saturate(1.35);
-  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+    0 1px 0 rgba(255, 255, 255, 0.85) inset;
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
@@ -437,19 +429,19 @@ body {
   margin: 0 auto;
   max-width: 1240px;
   border-radius: 1.15rem;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(228, 220, 208, 0.9);
+  background: #fffdf9;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.72) 0%,
-    rgba(255, 252, 247, 0.58) 50%,
-    rgba(255, 248, 240, 0.65) 100%
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(255, 252, 247, 0.9) 50%,
+    rgba(255, 248, 240, 0.92) 100%
   );
   box-shadow:
     0 10px 40px -18px rgba(28, 25, 22, 0.22),
-    0 1px 0 rgba(255, 255, 255, 0.75) inset,
-    0 0 0 1px rgba(212, 160, 23, 0.06);
-  backdrop-filter: blur(22px) saturate(1.35);
-  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+    0 1px 0 rgba(255, 255, 255, 0.85) inset;
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
 }
 
 .nav-link {
