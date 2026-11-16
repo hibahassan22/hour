@@ -3,12 +3,11 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { Calculator, Hourglass, Timer } from "lucide-react";
+import { Calculator, Hourglass } from "lucide-react";
 import {
   formatHours,
   formatMoney,
   hoursToWorkDays,
-  minutesPerCurrency,
   percentOfMonthly,
 } from "@/lib/calc";
 import { QUICK_ITEMS, type DecisionCategory } from "@/lib/types";
@@ -29,7 +28,6 @@ export function CalculatorView() {
   const hours = calcHours(price);
   const days = hoursToWorkDays(hours);
   const pct = percentOfMonthly(hours, settings);
-  const mpm = minutesPerCurrency(settings);
   const hoursLabel = formatHours(hours);
 
   const recent = useMemo(() => decisions.slice(0, 3), [decisions]);
@@ -69,15 +67,15 @@ export function CalculatorView() {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       {!user && (
-        <div className="glass-banner animate-fade-up flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-3.5">
-          <p className="text-[14px] text-[#524a39]">لحفظ قراراتك سجّل حساباً.</p>
+        <div className="glass-panel animate-fade-up flex flex-wrap items-center justify-between gap-3 px-4 py-3">
+          <p className="text-[13px] text-[#524a39]">لحفظ قراراتك سجّل حساباً.</p>
           <div className="flex gap-2">
-            <Link href="/login" className="btn-secondary !py-2">
+            <Link href="/login" className="btn-secondary !py-1.5 !text-[12px]">
               دخول
             </Link>
-            <Link href="/register" className="btn-primary !py-2">
+            <Link href="/register" className="btn-primary !py-1.5 !text-[12px]">
               إنشاء حساب
             </Link>
           </div>
@@ -85,39 +83,44 @@ export function CalculatorView() {
       )}
 
       {flash && (
-        <div className="animate-pop rounded-2xl border border-[#d4a017]/50 bg-gradient-to-l from-[#ffe59a]/70 to-[#ffd45e]/45 px-4 py-3 text-[14px] font-semibold text-[#3f2f00]">
+        <div className="glass-panel animate-pop px-4 py-3 text-[13px] font-medium text-[#1c1916]">
           {flash}
         </div>
       )}
 
-      <div className="glass-banner animate-fade-up flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-3.5">
+      <div className="glass-panel animate-fade-up flex flex-wrap items-center justify-between gap-3 px-4 py-3.5">
         <div className="flex items-center gap-3">
-          <span className="icon-glow animate-float flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#d4a017] to-[#ffd45e] text-[#3f2f00]">
-            <Hourglass className="h-5 w-5" strokeWidth={2.4} />
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#171717] text-white shadow-[0_8px_18px_-10px_rgba(23,23,23,0.5)]">
+            <Hourglass className="h-4 w-4" strokeWidth={2.3} />
           </span>
           <div>
-            <p className="text-[15px] font-semibold text-[#1c1916]">أهلاً بك، قبل أن تشتري...</p>
-            <p className="text-[13px] text-[#524a39]">المال اقتطاع مباشر من وقت حياتك.</p>
+            <p className="text-[14px] font-semibold text-[#1c1916]">قبل ما تشتري</p>
+            <p className="text-[12px] text-[#737373]">حوّل السعر لساعات من وقتك.</p>
           </div>
         </div>
-        <p className="rounded-full bg-white/80 px-3.5 py-1.5 text-[12px] text-[#524a39] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#ffe59a]/55">
-          ساعتك:{" "}
-          <strong className="text-[#6f5600]">{formatMoney(rate, settings.currency)}</strong>
+        <p className="rounded-full border border-white/50 bg-white/45 px-3 py-1.5 text-[12px] text-[#524a39] backdrop-blur-md">
+          ساعتك{" "}
+          <strong className="tabular-nums text-[#1c1916]">
+            {formatMoney(rate, settings.currency)}
+          </strong>
         </p>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-12">
+      <div className="grid gap-4 lg:grid-cols-12">
         <section className="card animate-fade-up-delay-1 space-y-4 p-5 lg:col-span-7 lg:p-6">
-          <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#ffe59a]/45 text-[#d4a017]">
-                <Calculator className="h-5 w-5" strokeWidth={2.3} />
-              </span>
-              <h1 className="text-[17px] font-semibold text-[#1c1916]">حساب تكلفة السلعة</h1>
-            </div>
-            <span className="rounded-full bg-gradient-to-l from-[#ffe59a]/60 to-[#ffd45e]/35 px-2.5 py-1 text-[11px] font-semibold text-[#6f5600]">
-              تحديث فوري
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/50 text-[#1c1916] ring-1 ring-white/60">
+              <Calculator className="h-4 w-4" strokeWidth={2.2} />
             </span>
+            <div>
+              <h1 className="text-[16px] font-semibold tracking-tight text-[#1c1916]">
+                حساب تكلفة السلعة
+              </h1>
+              <p className="text-[12px] text-[#737373]">
+                دخل {formatMoney(settings.monthlyIncome, settings.currency)} ·{" "}
+                {formatHours(monthHours)} س/شهر
+              </p>
+            </div>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
@@ -141,7 +144,7 @@ export function CalculatorView() {
                   onChange={(e) => setPrice(Number(e.target.value) || 0)}
                 />
                 <select
-                  className="money-badge cursor-pointer border-0 outline-none transition hover:brightness-105"
+                  className="money-badge cursor-pointer outline-none"
                   value={settings.currency}
                   onChange={(e) => updateSettings({ currency: e.target.value })}
                 >
@@ -154,7 +157,7 @@ export function CalculatorView() {
             </label>
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {QUICK_ITEMS.map((item) => (
               <button
                 key={item.name}
@@ -167,124 +170,103 @@ export function CalculatorView() {
             ))}
           </div>
 
-          <p className="rounded-xl bg-gradient-to-l from-[#faf3ec] to-[#ffe59a]/25 px-3 py-2.5 text-[12px] leading-relaxed text-[#524a39]">
-            دخل {formatMoney(settings.monthlyIncome, settings.currency)} ·{" "}
-            {settings.hoursPerWeek} س/أسبوع · قيمة الساعة{" "}
-            <strong className="text-[#6f5600]">{formatMoney(rate, settings.currency)}</strong> (
-            {formatHours(monthHours)} س/شهر)
-          </p>
-
-          <div className="border-t border-[#ede6df] pt-4">
-            <p className="mb-3 text-[15px] font-semibold text-[#1c1916]">
-              هل «{name || "المنتج"}» يستحق {hoursLabel} ساعة من عمرك؟
+          <div className="border-t border-black/[0.05] pt-4">
+            <p className="mb-3 text-[14px] font-medium text-[#1c1916]">
+              هل «{name || "المنتج"}» يستحق {hoursLabel} ساعة؟
             </p>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid gap-2.5 sm:grid-cols-2">
               <button
                 type="button"
                 onClick={() => decide("saved")}
-                className="hover-lift hover-glow rounded-2xl bg-gradient-to-l from-[#d4a017] to-[#ffd45e] p-4 text-right"
+                className="action-dark p-4 text-right"
               >
-                <p className="text-[14px] font-bold text-[#3f2f00]">تراجعت ووفّرت</p>
-                <p className="mt-1 text-[12px] text-[#3f2f00]/85">+{hoursLabel} ساعة حرّة</p>
+                <p className="text-[14px] font-semibold">تراجعت ووفّرت</p>
+                <p className="mt-1 text-[12px] text-white/55">+{hoursLabel} ساعة</p>
               </button>
               <button
                 type="button"
                 onClick={() => decide("bought")}
-                className="hover-lift rounded-2xl border border-[#e8e0d9] bg-[#faf3ec] p-4 text-right hover:border-[rgba(212,160,23,0.45)] hover:bg-[#fff9f3]"
+                className="action-glass p-4 text-right"
               >
                 <p className="text-[14px] font-semibold text-[#1c1916]">اشتريت بوعي</p>
-                <p className="mt-1 text-[12px] text-[#524a39]">تسجيل الشراء بالساعات</p>
+                <p className="mt-1 text-[12px] text-[#737373]">تسجيل الشراء</p>
               </button>
             </div>
           </div>
         </section>
 
-        <section className="card-elevated animate-fade-up-delay-2 space-y-4 p-5 lg:col-span-5 lg:p-6">
-          <div className="flex items-center justify-between">
-            <p className="text-[12px] font-semibold tracking-wide text-[#6f5600]">
-              النتيجة الحقيقية
-            </p>
-            <Timer className="animate-float h-5 w-5 text-[#d4a017]" strokeWidth={2.3} />
-          </div>
+        <section className="card-elevated animate-fade-up-delay-2 flex flex-col gap-4 p-5 lg:col-span-5 lg:p-6">
+          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#737373]">
+            النتيجة
+          </p>
 
           <div key={bump} className="animate-pop">
-            <p className="text-[13px] text-[#524a39]">تكلفة {name || "السلعة"} تعادل</p>
-            <p className="mt-1 flex items-baseline gap-2">
-              <span className="bg-gradient-to-l from-[#6f5600] to-[#d4a017] bg-clip-text text-[44px] font-bold leading-none tabular-nums text-transparent">
+            <p className="text-[13px] text-[#737373]">تكلفة {name || "السلعة"} تعادل</p>
+            <p className="mt-2 flex flex-wrap items-baseline gap-2">
+              <span className="text-[46px] font-bold leading-none tracking-tight tabular-nums text-[#1c1916]">
                 {hoursLabel}
               </span>
-              <span className="text-[18px] font-medium text-[#1c1916]">ساعة عمل</span>
+              <span className="text-[16px] font-medium text-[#524a39]">ساعة عمل</span>
             </p>
-            <p className="mt-3 rounded-xl bg-[#faf3ec] px-3 py-2.5 text-[13px] text-[#524a39]">
-              تعادل <strong className="text-[#1c1916]">{formatHours(days)}</strong> يوم عمل كامل.
+            <p className="mt-3 text-[13px] text-[#524a39]">
+              ≈ <strong className="text-[#1c1916]">{formatHours(days)}</strong> يوم عمل
             </p>
           </div>
 
           <div>
-            <div className="mb-1.5 flex justify-between text-[12px] text-[#524a39]">
-              <span>من ساعات الشهر</span>
-              <span className="font-semibold tabular-nums text-[#6f5600]">{pct.toFixed(1)}%</span>
+            <div className="mb-2 flex justify-between text-[12px] text-[#737373]">
+              <span>من جهد الشهر</span>
+              <span className="font-semibold tabular-nums text-[#1c1916]">{pct.toFixed(1)}%</span>
             </div>
             <div className="progress-track">
               <div
                 className="progress-fill"
-                style={{ width: `${Math.min(Math.max(pct, 3), 100)}%` }}
+                style={{ width: `${Math.min(Math.max(pct, 2), 100)}%` }}
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
-            <div className="hover-lift rounded-xl bg-[#faf3ec] px-3 py-3">
-              <p className="text-[11px] text-[#7a7160]">دقيقة / وحدة</p>
-              <p className="text-[17px] font-bold tabular-nums text-[#1c1916]">{mpm.toFixed(1)}</p>
+          <div className="mt-auto grid grid-cols-2 gap-2 border-t border-black/[0.05] pt-4">
+            <div className="soft-tile px-3 py-3">
+              <p className="text-[11px] text-[#737373]">السعر</p>
+              <p className="mt-0.5 text-[15px] font-semibold tabular-nums text-[#1c1916]">
+                {formatMoney(price, settings.currency)}
+              </p>
             </div>
-            <div className="hover-lift rounded-xl bg-[#faf3ec] px-3 py-3">
-              <p className="text-[11px] text-[#7a7160]">أيام عمل</p>
-              <p className="text-[17px] font-bold tabular-nums text-[#1c1916]">
+            <div className="soft-tile px-3 py-3">
+              <p className="text-[11px] text-[#737373]">أيام عمل</p>
+              <p className="mt-0.5 text-[15px] font-semibold tabular-nums text-[#1c1916]">
                 {formatHours(days)}
               </p>
             </div>
           </div>
-
-          <p className="border-t border-[#ede6df] pt-3 text-[13px] text-[#524a39]">
-            هل المقايضة عادلة؟ أنت تتبادل وقتاً من عمرك.
-          </p>
-
-          <div className="rounded-2xl bg-gradient-to-br from-[#1c1916] to-[#2d261f] px-4 py-3.5 text-center text-white transition hover:-translate-y-0.5 hover:shadow-[0_16px_32px_-16px_rgba(28,25,22,0.55)]">
-            <p className="text-[11px] text-white/50">ودجت سريع</p>
-            <p className="mt-1 text-[15px] font-semibold tabular-nums">
-              {formatMoney(price, settings.currency)} ={" "}
-              <span className="text-[#ffd45e]">{hoursLabel} ساعة</span>
-            </p>
-          </div>
         </section>
       </div>
 
-      <section className="card animate-fade-up-delay-3 p-5">
+      <section className="card animate-fade-up-delay-3 p-4 sm:p-5">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-[15px] font-semibold text-[#1c1916]">آخر القرارات</h2>
-          <span className="rounded-full bg-[#d4a017]/15 px-2.5 py-1 text-[12px] font-semibold text-[#6f5600]">
+          <h2 className="text-[14px] font-semibold text-[#1c1916]">آخر القرارات</h2>
+          <span className="rounded-full border border-white/50 bg-white/40 px-2.5 py-1 text-[12px] font-medium text-[#524a39]">
             +{formatHours(weekSaved)} س هذا الأسبوع
           </span>
         </div>
         <div className="grid gap-2 md:grid-cols-3">
-          {recent.map((d, i) => (
+          {recent.map((d) => (
             <div
               key={d.id}
-              className="hover-lift flex items-center justify-between gap-2 rounded-xl bg-[#faf3ec] px-3 py-2.5"
-              style={{ animationDelay: `${i * 0.05}s` }}
+              className="hover-lift soft-tile flex items-center justify-between gap-2 px-3 py-2.5"
             >
               <div className="min-w-0">
                 <p className="truncate text-[13px] font-medium text-[#1c1916]">
                   {d.kind === "saved" ? "تراجع ·" : "شراء ·"} {d.name}
                 </p>
-                <p className="text-[11px] text-[#7a7160]">
+                <p className="text-[11px] text-[#737373]">
                   {formatMoney(d.price, settings.currency)}
                 </p>
               </div>
               <span
                 className={`shrink-0 text-[13px] font-bold tabular-nums ${
-                  d.kind === "saved" ? "text-[#6f5600]" : "text-[#524a39]"
+                  d.kind === "saved" ? "text-[#1c1916]" : "text-[#737373]"
                 }`}
               >
                 {d.kind === "saved" ? "+" : "−"}
@@ -293,7 +275,7 @@ export function CalculatorView() {
             </div>
           ))}
           {recent.length === 0 && (
-            <p className="text-[13px] text-[#524a39] md:col-span-3">لا قرارات بعد.</p>
+            <p className="text-[13px] text-[#737373] md:col-span-3">لا قرارات بعد.</p>
           )}
         </div>
       </section>

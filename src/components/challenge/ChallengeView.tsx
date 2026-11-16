@@ -87,18 +87,18 @@ export function ChallengeView() {
 
   return (
     <div className="space-y-5">
-      <section className="animate-fade-up flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[rgba(197,160,40,0.28)] bg-gradient-to-l from-[#fff8f4] to-[#ffe08b]/40 px-5 py-4 shadow-[0_10px_28px_-20px_rgba(116,91,0,0.3)]">
+      <section className="glass-panel animate-fade-up flex flex-wrap items-center justify-between gap-3 px-5 py-4">
         <div>
-          <p className="font-semibold text-[#1e1b18]">
-            مبروك {settings.userName}! وفّرت {formatHours(monthSavedHours)} ساعة راحة هذا
-            الشهر بتجنّب الشراء الاندفاعي.
+          <p className="font-semibold text-[#1c1916]">
+            وفّرت {formatHours(monthSavedHours)} ساعة هذا الشهر
+            {settings.userName ? `، ${settings.userName}` : ""}.
           </p>
-          <p className="mt-1 text-[13px] text-[#4d4635]">
-            كل ساعة محفوظة = ساعة تعيشها بحرّيتك.
+          <p className="mt-1 text-[13px] text-[#737373]">
+            من قرارات التراجع عن الشراء الاندفاعي.
           </p>
         </div>
         <button type="button" className="btn-secondary shrink-0">
-          مشاركة الإنجاز
+          مشاركة
         </button>
       </section>
 
@@ -108,18 +108,18 @@ export function ChallengeView() {
           <div className="mt-5 flex flex-wrap items-center gap-8">
             <Ring value={progress} label={`${Math.round(progress)}%`} />
             <div>
-              <p className="stat-value text-[#745b00]">{formatHours(monthSavedHours)}</p>
+              <p className="stat-value text-[#1c1916]">{formatHours(monthSavedHours)}</p>
               <p className="text-[13px] text-[#4d4635]">ساعة حرية محفوظة</p>
               <div className="mt-4 grid grid-cols-2 gap-3 text-[13px]">
-                <div className="hover-lift rounded-xl bg-[#faf2ed] px-3 py-2.5">
-                  <p className="text-[11px] text-[#7f7663]">المتبقي للهدف</p>
-                  <p className="font-semibold tabular-nums text-[#1e1b18]">
+                <div className="hover-lift soft-tile px-3 py-2.5">
+                  <p className="text-[11px] text-[#737373]">المتبقي للهدف</p>
+                  <p className="font-semibold tabular-nums text-[#1c1916]">
                     {formatHours(remaining)} س
                   </p>
                 </div>
-                <div className="hover-lift rounded-xl bg-[#faf2ed] px-3 py-2.5">
-                  <p className="text-[11px] text-[#7f7663]">عدد القرارات</p>
-                  <p className="font-semibold tabular-nums text-[#1e1b18]">{month.length}</p>
+                <div className="hover-lift soft-tile px-3 py-2.5">
+                  <p className="text-[11px] text-[#737373]">عدد القرارات</p>
+                  <p className="font-semibold tabular-nums text-[#1c1916]">{month.length}</p>
                 </div>
               </div>
             </div>
@@ -129,7 +129,7 @@ export function ChallengeView() {
         <div className="grid gap-4">
           <section className="card-elevated animate-fade-up-delay-2 p-5">
             <p className="text-[13px] text-[#4d4635]">إجمالي المبلغ المتجنَّب</p>
-            <p className="mt-1 text-3xl font-bold tabular-nums text-[#745b00]">
+            <p className="mt-1 text-3xl font-bold tabular-nums text-[#1c1916]">
               {formatMoney(monthSavedMoney, settings.currency)}
             </p>
             <p className="mt-2 text-[13px] text-[#4d4635]">بعيداً عن فخ الشراء العاطفي.</p>
@@ -162,7 +162,7 @@ export function ChallengeView() {
             return (
               <article key={cat} className="card hover-lift p-4">
                 <div className="flex items-center gap-2">
-                  <span className="rounded-lg bg-[#ffe08b]/45 p-2 text-[#745b00]">
+                  <span className="rounded-lg bg-white/45 p-2 text-[#1c1916] ring-1 ring-white/50">
                     <Icon className="h-4 w-4" />
                   </span>
                   <h3 className="font-semibold text-[#1e1b18]">{CATEGORY_LABELS[cat]}</h3>
@@ -216,19 +216,19 @@ export function ChallengeView() {
                 key={b.title}
                 className="card hover-lift flex flex-col items-center p-5 text-center"
               >
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#fed65b] to-[#c5a028] text-[#493800] shadow-[0_0_20px_rgba(197,160,40,0.35)] transition hover:scale-105">
-                  <Icon className="h-7 w-7" />
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#171717] text-white">
+                  <Icon className="h-6 w-6" />
                 </span>
-                <h3 className="mt-3 font-semibold text-[#1e1b18]">{b.title}</h3>
-                <p className="mt-1 text-[12px] text-[#4d4635]">{b.desc}</p>
-                <p className="mt-3 text-[13px] font-semibold tabular-nums text-[#745b00]">
+                <h3 className="mt-3 font-semibold text-[#1c1916]">{b.title}</h3>
+                <p className="mt-1 text-[12px] text-[#737373]">{b.desc}</p>
+                <p className="mt-3 text-[13px] font-semibold tabular-nums text-[#1c1916]">
                   {Math.round(b.pct)}%
                 </p>
                 <span
                   className={`mt-2 rounded-full px-3 py-1 text-[11px] font-medium ${
                     b.done
-                      ? "bg-[rgba(0,150,104,0.12)] text-[#009668]"
-                      : "bg-[#faf2ed] text-[#4d4635]"
+                      ? "bg-[#171717] text-white"
+                      : "bg-white/45 text-[#737373] ring-1 ring-white/50"
                   }`}
                 >
                   {b.done ? "مفعّلة" : "قيد التقدم"}
@@ -239,14 +239,10 @@ export function ChallengeView() {
         </div>
       </section>
 
-      <blockquote className="rounded-2xl bg-[#faf2ed] px-6 py-5 text-center text-[14px] text-[#4d4635]">
-        الوقت هو العملة الحقيقية لحياتك — عندما تنفق مالاً، فأنت تنفق ساعات لن تعود.
-      </blockquote>
-
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[rgba(197,160,40,0.3)] bg-white/90 px-5 py-4 shadow-[0_10px_28px_-20px_rgba(116,91,0,0.25)]">
-        <p className="text-[14px] text-[#1e1b18]">هل تراجعت مؤخراً عن شراء؟</p>
+      <div className="glass-panel flex flex-wrap items-center justify-between gap-3 px-5 py-4">
+        <p className="text-[14px] text-[#1c1916]">سجّل تراجعاً جديداً من الحاسبة</p>
         <Link href="/" className="btn-primary">
-          تسجيل تراجع جديد
+          فتح الحاسبة
         </Link>
       </div>
     </div>
@@ -266,7 +262,7 @@ function Ring({ value, label }: { value: number; label: string }) {
           cy="64"
           r={r}
           fill="none"
-          stroke="#C5A028"
+          stroke="#171717"
           strokeWidth="10"
           strokeLinecap="round"
           strokeDasharray={c}

@@ -9,17 +9,17 @@ export function SettingsView() {
   const hours = monthlyHours(settings);
 
   return (
-    <div className="mx-auto max-w-2xl space-y-5">
-      <div className="animate-fade-up">
-        <h1 className="text-xl font-semibold text-[#1c1916] md:text-2xl">
-          إعداد الدخل وقيمة الساعة
-        </h1>
-        <p className="mt-1 text-[14px] text-[#524a39]">
-          أدخل دخلك وساعات عملك مرة واحدة — الحاسبة تعتمد عليها في كل مكان.
-        </p>
-      </div>
+    <div className="mx-auto grid max-w-5xl gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+      <section className="card animate-fade-up space-y-4 p-5 md:p-6">
+        <div>
+          <h1 className="text-xl font-semibold tracking-tight text-[#1c1916]">
+            إعداد الدخل
+          </h1>
+          <p className="mt-1 text-[13px] text-[#737373]">
+            البيانات دي بتحدد قيمة ساعتك في كل الحسابات.
+          </p>
+        </div>
 
-      <section className="card animate-fade-up-delay-1 space-y-4 p-5 md:p-6">
         <Field
           label="الاسم الظاهر"
           value={settings.userName}
@@ -47,7 +47,7 @@ export function SettingsView() {
         </div>
         <MoneyField
           label="تكاليف إضافية شهرية"
-          hint="مواصلات، وجبات عمل…"
+          hint="مواصلات، وجبات…"
           currency={settings.currency}
           negative
           value={String(settings.extraCosts)}
@@ -76,17 +76,17 @@ export function SettingsView() {
         </div>
       </section>
 
-      <section className="card-elevated animate-pop p-6 text-center">
-        <p className="text-[13px] font-medium text-[#524a39]">قيمة الساعة الصافية الحقيقية</p>
-        <p className="mt-2 text-4xl font-bold tabular-nums">
-          <span className="bg-gradient-to-l from-[#6f5600] to-[#d4a017] bg-clip-text text-transparent">
-            {formatMoney(rate, settings.currency)}
-          </span>
-          <span className="text-lg font-medium text-[#7a7160]"> / ساعة</span>
+      <section className="card-elevated animate-fade-up-delay-1 flex flex-col justify-center p-6">
+        <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[#737373]">
+          قيمة الساعة
         </p>
-        <p className="mt-3 text-[13px] text-[#524a39]">
+        <p className="mt-3 text-4xl font-bold tracking-tight tabular-nums text-[#1c1916]">
+          {formatMoney(rate, settings.currency)}
+        </p>
+        <p className="mt-2 text-[13px] text-[#737373]">لكل ساعة عمل صافية</p>
+        <p className="mt-6 border-t border-black/[0.05] pt-4 text-[13px] text-[#524a39]">
           صافي {(settings.monthlyIncome - settings.extraCosts).toLocaleString("en-US")} ÷{" "}
-          {hours.toFixed(0)} ساعة عمل شهرية
+          {hours.toFixed(0)} ساعة / شهر
         </p>
       </section>
     </div>
@@ -136,14 +136,10 @@ function MoneyField({
     <label className="block space-y-1.5">
       <span className="flex items-center justify-between gap-2">
         <span className="label !mb-0">{label}</span>
-        {hint && <span className="text-[11px] text-[#7a7160]">{hint}</span>}
+        {hint && <span className="text-[11px] text-[#a3a3a3]">{hint}</span>}
       </span>
       <div className="money-wrap">
-        <input
-          type="number"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-        />
+        <input type="number" value={value} onChange={(e) => onChange(e.target.value)} />
         <span className="money-badge">{negative ? `− ${currency}` : currency}</span>
       </div>
     </label>

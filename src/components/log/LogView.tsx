@@ -45,36 +45,45 @@ export function LogView() {
   }
 
   return (
-    <div className="space-y-5">
-      {!user && (
-        <div className="animate-fade-up flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[rgba(197,160,40,0.28)] bg-gradient-to-l from-[#fff8f4] to-[#ffe08b]/35 px-4 py-3">
-          <p className="text-[14px] text-[#4d4635]">سجّل دخولك لعرض وحفظ سجل قراراتك.</p>
-          <Link href="/login" className="btn-primary !py-2">
-            تسجيل الدخول
-          </Link>
-        </div>
-      )}
+    <div className="space-y-4">
+      <section className="glass-panel animate-fade-up p-4 sm:p-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <h1 className="text-xl font-semibold tracking-tight text-[#1c1916] md:text-2xl">
+              سجل القرارات
+            </h1>
+            <p className="mt-1 text-[13px] text-[#737373]">
+              {user
+                ? "تتبع التراجعات والمشتريات مع حساب سريع."
+                : "سجّل دخولك لعرض وحفظ سجل قراراتك."}
+            </p>
+          </div>
 
-      <div className="animate-fade-up flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-semibold text-[#1e1b18] md:text-2xl">
-            سجل القرارات والودجت
-          </h1>
-          <p className="mt-1 text-[14px] text-[#4d4635]">
-            تتبع كل تراجع وشراء — واحسب السعر فوراً من الودجت.
-          </p>
+          <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+            <div className="soft-tile flex items-center gap-4 px-4 py-2.5">
+              <div>
+                <p className="text-[11px] text-[#737373]">ساعات موفَّرة</p>
+                <p className="text-[18px] font-bold tabular-nums text-[#1c1916]">
+                  {formatHours(allSavedHours)}
+                </p>
+              </div>
+              <div className="h-8 w-px bg-black/5" />
+              <div>
+                <p className="text-[11px] text-[#737373]">أيام</p>
+                <p className="text-[18px] font-bold tabular-nums text-[#1c1916]">
+                  {formatHours(hoursToWorkDays(allSavedHours))}
+                </p>
+              </div>
+            </div>
+
+            {!user && (
+              <Link href="/login" className="btn-primary !py-2 !text-[12px]">
+                تسجيل الدخول
+              </Link>
+            )}
+          </div>
         </div>
-        <div className="hover-lift rounded-2xl border border-[rgba(197,160,40,0.35)] bg-gradient-to-br from-[#ffe08b]/55 to-white px-5 py-3">
-          <p className="text-[11px] text-[#7f7663]">إجمالي الساعات الموفَّرة</p>
-          <p className="text-2xl font-bold tabular-nums text-[#745b00]">
-            {formatHours(allSavedHours)}{" "}
-            <span className="text-[13px] font-medium text-[#4d4635]">ساعة عمل</span>
-          </p>
-          <p className="text-[11px] text-[#7f7663]">
-            ≈ {formatHours(hoursToWorkDays(allSavedHours))} يوم كامل
-          </p>
-        </div>
-      </div>
+      </section>
 
       <div className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
         <section className="card animate-fade-up-delay-1 p-5">
@@ -101,7 +110,7 @@ export function LogView() {
             {list.map((d) => (
               <li
                 key={d.id}
-                className="hover-lift flex flex-wrap items-start justify-between gap-3 rounded-xl border border-[rgba(197,160,40,0.15)] bg-[#faf2ed]/70 px-4 py-3"
+                className="hover-lift soft-tile flex flex-wrap items-start justify-between gap-3 px-4 py-3"
               >
                 <div>
                   <p className="font-semibold text-[#1e1b18]">{d.name}</p>
@@ -111,7 +120,7 @@ export function LogView() {
                   </p>
                   <p
                     className={`mt-2 inline-flex items-center gap-1 text-[12px] font-medium ${
-                      d.kind === "saved" ? "text-[#009668]" : "text-[#745b00]"
+                      d.kind === "saved" ? "text-[#1c1916]" : "text-[#737373]"
                     }`}
                   >
                     {d.kind === "saved" ? (
@@ -239,7 +248,7 @@ function Ring({ value }: { value: number }) {
           cy="50"
           r={r}
           fill="none"
-          stroke="#C5A028"
+          stroke="#171717"
           strokeWidth="8"
           strokeLinecap="round"
           strokeDasharray={c}
@@ -247,7 +256,7 @@ function Ring({ value }: { value: number }) {
           className="transition-all duration-700 ease-out"
         />
       </svg>
-      <span className="absolute inset-0 flex items-center justify-center text-lg font-semibold tabular-nums text-[#745b00]">
+      <span className="absolute inset-0 flex items-center justify-center text-lg font-semibold tabular-nums text-[#1c1916]">
         {value}%
       </span>
     </div>

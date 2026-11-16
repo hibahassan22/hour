@@ -11,13 +11,13 @@ function ShellInner({ children }: { children: React.ReactNode }) {
   const isAuth = pathname === "/login" || pathname === "/register";
 
   return (
-    <div className="flex min-h-full flex-col">
+    <div className="flex min-h-dvh flex-col">
       <Header />
       <main
         className={
           isAuth
             ? "mx-auto flex w-full max-w-[1100px] flex-1 items-center px-4 py-8 sm:px-6"
-            : "mx-auto w-full max-w-[1240px] flex-1 px-4 py-6 sm:px-6 lg:px-10 lg:py-8"
+            : "mx-auto w-full max-w-[1240px] flex-1 px-4 py-5 sm:px-6 lg:px-8 lg:py-6"
         }
       >
         {children}

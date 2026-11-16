@@ -71,7 +71,7 @@ export function CompareView() {
   return (
     <div className="space-y-5">
       {flash && (
-        <div className="animate-pop rounded-2xl border border-[#c5a028]/45 bg-[#ffe08b]/50 px-4 py-3 text-[14px] font-medium text-[#493800]">
+        <div className="glass-panel animate-pop px-4 py-3 text-[13px] font-medium text-[#1c1916]">
           {flash}
         </div>
       )}
@@ -87,7 +87,7 @@ export function CompareView() {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <p className="text-3xl font-bold tabular-nums text-[#745b00]">
+            <p className="text-3xl font-bold tabular-nums text-[#1c1916]">
               {formatMoney(price, settings.currency)}
             </p>
           </div>
@@ -139,7 +139,7 @@ export function CompareView() {
             <p className="mt-1 text-[13px] text-[#4d4635]">
               انتظر قبل الشراء — الرغبة الاندفاعية غالباً تضعف مع الوقت.
             </p>
-            <p className="mt-4 font-mono text-2xl font-semibold tabular-nums text-[#745b00]">
+            <p className="mt-4 font-mono text-2xl font-semibold tabular-nums text-[#1c1916]">
               {String(h).padStart(2, "0")}:{String(m).padStart(2, "0")}:
               {String(s).padStart(2, "0")}
             </p>
@@ -151,14 +151,6 @@ export function CompareView() {
                 وفّر الساعات
               </button>
             </div>
-          </section>
-
-          <section className="card animate-fade-up-delay-2 p-5">
-            <h3 className="text-[13px] font-semibold text-[#1e1b18]">اندفاع عاطفي × الوقت</h3>
-            <ImpulseChart />
-            <p className="mt-2 text-[12px] text-[#4d4635]">
-              منحنى مبسّط: الحماس يهبط بعد أول يومين.
-            </p>
           </section>
         </div>
       </div>
@@ -172,7 +164,7 @@ export function CompareView() {
             const Icon = ICONS[a.icon];
             return (
               <article key={a.id} className="card hover-lift p-4">
-                <span className="inline-flex rounded-lg bg-[#ffe08b]/40 p-2 text-[#745b00]">
+                <span className="inline-flex rounded-lg bg-white/45 p-2 text-[#1c1916] ring-1 ring-white/50">
                   <Icon className="h-5 w-5" />
                 </span>
                 <h3 className="mt-2 font-semibold text-[#1e1b18]">{a.title}</h3>
@@ -185,7 +177,7 @@ export function CompareView() {
 
       <section className="card animate-fade-up overflow-x-auto p-0">
         <table className="w-full min-w-[640px] text-[13px]">
-          <thead className="bg-[#faf2ed] text-[#4d4635]">
+          <thead className="bg-white/35 text-[#737373]">
             <tr>
               <th className="px-4 py-3 text-start font-medium">الخيار</th>
               <th className="px-4 py-3 text-start font-medium">القيمة</th>
@@ -220,7 +212,7 @@ export function CompareView() {
               currency={settings.currency}
               impact="ذكريات وصحة نفسية"
               tag="خيار جيد"
-              tagClass="bg-[#ffe08b]/55 text-[#493800]"
+              tagClass="bg-white/50 text-[#1c1916]"
             />
           </tbody>
         </table>
@@ -245,8 +237,8 @@ export function CompareView() {
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="hover-lift rounded-xl bg-[#faf2ed] px-3 py-3 text-center">
-      <p className="text-xl font-semibold tabular-nums text-[#745b00]">{value}</p>
+    <div className="hover-lift soft-tile px-3 py-3 text-center">
+      <p className="text-xl font-semibold tabular-nums text-[#1c1916]">{value}</p>
       <p className="text-[11px] text-[#7f7663]">{label}</p>
     </div>
   );
@@ -281,29 +273,5 @@ function Row({
         </span>
       </td>
     </tr>
-  );
-}
-
-function ImpulseChart() {
-  const points = [
-    [0, 92],
-    [20, 88],
-    [40, 70],
-    [60, 48],
-    [80, 32],
-    [100, 22],
-  ];
-  const d = points
-    .map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x} ${100 - y}`)
-    .join(" ");
-  return (
-    <svg viewBox="0 0 100 100" className="mt-3 h-24 w-full text-[#C5A028]">
-      <path d={d} fill="none" stroke="currentColor" strokeWidth="2.5" />
-      <path
-        d={`${d} L 100 100 L 0 100 Z`}
-        fill="rgba(197,160,40,0.12)"
-        stroke="none"
-      />
-    </svg>
   );
 }
