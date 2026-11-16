@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { Calculator, Hourglass, Timer } from "lucide-react";
 import {
   formatHours,
   formatMoney,
@@ -92,12 +93,7 @@ export function CalculatorView() {
       <div className="glass-banner animate-fade-up flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-3.5">
         <div className="flex items-center gap-3">
           <span className="icon-glow animate-float flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#d4a017] to-[#ffd45e] text-[#3f2f00]">
-            <span
-              className="material-symbols-outlined text-[22px]"
-              style={{ fontVariationSettings: "'FILL' 1" }}
-            >
-              hourglass_top
-            </span>
+            <Hourglass className="h-5 w-5" strokeWidth={2.4} />
           </span>
           <div>
             <p className="text-[15px] font-semibold text-[#1c1916]">أهلاً بك، قبل أن تشتري...</p>
@@ -115,7 +111,7 @@ export function CalculatorView() {
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#ffe59a]/45 text-[#d4a017]">
-                <span className="material-symbols-outlined text-[20px]">calculate</span>
+                <Calculator className="h-5 w-5" strokeWidth={2.3} />
               </span>
               <h1 className="text-[17px] font-semibold text-[#1c1916]">حساب تكلفة السلعة</h1>
             </div>
@@ -208,9 +204,7 @@ export function CalculatorView() {
             <p className="text-[12px] font-semibold tracking-wide text-[#6f5600]">
               النتيجة الحقيقية
             </p>
-            <span className="material-symbols-outlined animate-float text-[18px] text-[#d4a017]">
-              timelapse
-            </span>
+            <Timer className="animate-float h-5 w-5 text-[#d4a017]" strokeWidth={2.3} />
           </div>
 
           <div key={bump} className="animate-pop">

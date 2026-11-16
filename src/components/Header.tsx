@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { Hourglass, LayoutGrid } from "lucide-react";
 import { formatMoney } from "@/lib/calc";
 import { useApp } from "@/context/AppContext";
 import { useAuth } from "@/context/AuthContext";
-
-const LOGO =
-  "https://lh3.googleusercontent.com/aida/ALJJyrAuhEuhBR7WzOQ0Nn5m8r9TgXV-hrvSQne2t7U1xrmZ-cRp_0nEvpZsj8A3j02VyUaYPx4UPH9Fq5OvoJTiumzFFKJexiPEvpTcWXQLj8_ns7lvWRGopVK7R7WL3KLrOLgOuiaiwchlgDje74NGeyQ6asoqH4Xq-NslHDOBSieTbY2v77EMMPLuwacHjsDTGjco9EvS7GlGgAvi_xupIONEIngmqq1yfGVmy8hX6cK3mg";
 
 const NAV = [
   { href: "/", label: "الحاسبة", full: "الحاسبة الفورية" },
@@ -29,8 +27,9 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-[rgba(212,160,23,0.12)] bg-[#fffaf4]/90 shadow-[0_8px_28px_-20px_rgba(111,86,0,0.35)] backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-[1240px] items-center gap-3 px-4 sm:px-6 lg:px-10">
         <Link href="/" className="group flex shrink-0 items-center gap-2.5 transition hover:-translate-y-0.5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" src={LOGO} className="h-7 w-auto transition group-hover:scale-105" />
+          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-[#d4a017] to-[#ffd45e] text-[#3f2f00] shadow-[0_6px_14px_-6px_rgba(212,160,23,0.7)] transition group-hover:scale-105">
+            <Hourglass className="h-4 w-4" strokeWidth={2.4} />
+          </span>
           <span className="hidden leading-tight md:block">
             <span className="block text-[15px] font-semibold text-[#1c1916]">
               كم ساعة من عمرك؟
@@ -73,7 +72,7 @@ export function Header() {
             href="/log#widget"
             className="hidden items-center gap-1 rounded-xl bg-gradient-to-l from-[#d4a017] to-[#ffd45e] px-3 py-1.5 text-[12px] font-semibold text-[#3f2f00] shadow-[0_8px_18px_-8px_rgba(212,160,23,0.6)] transition hover:-translate-y-0.5 hover:brightness-105 md:inline-flex"
           >
-            <span className="material-symbols-outlined text-[16px]">widgets</span>
+            <LayoutGrid className="h-3.5 w-3.5" strokeWidth={2.4} />
             ودجت
           </Link>
 
